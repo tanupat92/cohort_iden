@@ -11,7 +11,12 @@
 
 ## data
 - 1000 patients Synthea dataset
-- snomed-ct and loinc for ontology
+- snomed-ct and loinc for ontology 
+    - to run properly, these 3 files need to be downloaded and copy into back/data 
+        - sct2_Concept_Full* 
+        - sct2_Description_Full*
+        - sct2_Relationship_Full*
+    
 
 ## how to use
 1. search a term
