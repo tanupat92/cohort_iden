@@ -25,3 +25,4 @@ _output
 /types
 .eslintcache
 sct2_*
+*.ipynb
