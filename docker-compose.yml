@@ -1,0 +1,39 @@
+version: "3"
+services:
+  back:
+    build: ./back
+    ports:
+      - 8000:8000
+    volumes:
+      - ./back:/app:Z
+    # env_file:
+    #     - ./back/.env
+    environment:
+      - database_hostname=postgres
+      - database_port=5432
+      - database_password=password123
+      - database_name=cohortiden
+      - database_username=postgres
+    command: bash -c "alembic upgrade head && python load_data.py && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+    depends_on:
+      - postgres
+  front:
+    build: ./front/app
+    ports:
+      - 5173:5173
+    volumes:
+      - ./front/app:/front_app/dist
+    
+
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=password123
+      - POSTGRES_DB=cohortiden
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+
+volumes:
+  postgres-db:
